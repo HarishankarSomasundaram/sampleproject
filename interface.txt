@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InterfaceSample
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var foo = new IFoo(1);
+            foo.Do();
+        }
+    }
+    [
+    ComImport,
+    Guid("C906C002-B214-40d7-8941-F223868B39A5"),
+    CoClass(typeof(FooImpl))
+    ]
+    public interface IFoo
+    {
+        void Do();
+    }
+    public class FooImpl : IFoo
+    {
+        private readonly int i;
+
+        public FooImpl(int i)
+        {
+            this.i = i;
+        }
+
+        public void Do()
+        {
+            Console.WriteLine(i);
+        }
+    }
+
+}
